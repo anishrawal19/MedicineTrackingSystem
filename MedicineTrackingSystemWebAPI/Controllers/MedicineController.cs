@@ -21,7 +21,16 @@ namespace MedicineTrackingSystemWebAPI.Controllers
         [HttpGet]
         public List<Medicine> Get()
         {
-            return _context.medicines.ToList();
+            var medicines = _context.medicines.ToList();
+            //seeding data if no data in DB
+            if (medicines.Count == 0)
+            {
+                medicines.Add(new Medicine() { Name = "Med1", Brand = "Cipla", ExpiryDate = DateTime.Now, Notes = "cipla med", Price = 100, Quantity = 5, Id = 10 });
+                medicines.Add(new Medicine() { Name = "Med2", Brand = "Cipla", ExpiryDate = DateTime.Now, Notes = "cipla med", Price = 100, Quantity = 5, Id = 11 });
+                medicines.Add(new Medicine() { Name = "Med3", Brand = "Cipla", ExpiryDate = DateTime.Now, Notes = "cipla med", Price = 100, Quantity = 5, Id = 12 });
+            }
+
+            return medicines;
         }
 
     }
